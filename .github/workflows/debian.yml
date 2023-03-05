@@ -1,0 +1,25 @@
+name: Build debian package
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build debian package
+    steps:
+      - uses: actions/checkout@v3
+      # Setup
+      - run: sudo apt-get install binutils sbsigntool devscripts pbuilder debian-archive-keyring
+      # directory is needed for arch linux tests
+      - run: sudo mkdir -p /etc/mkinitcpio.d
+
+      # Setup workspace
+      - run: set -e
+      - run: git submodule update --init --recursive
+      - run: cp -a debian verity-squash-root
+      - run: sudo bash build_source.sh verity-squash-root
+      - run: sudo pbuilder create --distribution bookworm --mirror https://deb.debian.org/debian
+      - run: sudo pbuilder build --bindmounts /etc/mkinitcpio.d verity-squash-root_*.dsc
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: debian-bookworm.deb
+          path: /var/cache/pbuilder/result/*.deb

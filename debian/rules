@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+export PYBUILD_NAME=verity-squash-root
+
+%:
+	dh $@ --with python3 --buildsystem=pybuild
+
+override_dh_auto_test:
+	shellcheck usr/lib/initcpio/install/verity-squash-root usr/lib/verity-squash-root/*
+	flake8 src/ tests/ setup.py
+	PYTHONPATH=src python3 -m unittest tests/unit/tests.py
+	mypy src

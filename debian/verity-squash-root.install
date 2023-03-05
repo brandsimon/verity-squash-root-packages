@@ -1,0 +1,7 @@
+src/verity_squash_root/default_config.ini /usr/share/verity_squash_root/default.ini
+src/verity_squash_root/default_config.ini /etc/verity_squash_root/config.ini
+usr/lib/verity-squash-root/* /usr/lib/verity-squash-root
+usr/lib/dracut/modules.d/99verity-squash-root/module-setup.sh /usr/lib/dracut/modules.d/99verity-squash-root/
+usr/lib/dracut/modules.d/99verity-squash-root/verity_squash_root.conf /usr/lib/dracut/modules.d/99verity-squash-root/
+usr/lib/initcpio/install/verity-squash-root /usr/lib/initcpio/install/
+usr/share/bash-completion/completions/verity-squash-root /usr/share/bash-completion/completions/

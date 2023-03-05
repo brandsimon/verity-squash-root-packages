@@ -1,0 +1,5 @@
+verity-squash-root (0.2.3-1) unstable; urgency=medium
+
+  * Initial package
+
+ -- Simon Brand <simon.brand@postadigitale.de>  Sun, 05 Mar 2023 11:52:59 +0000
