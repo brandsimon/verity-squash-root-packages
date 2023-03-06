@@ -24,6 +24,7 @@ Depends:
  age,
  binutils,
  cryptsetup-bin,
+ dracut,
  efitools,
  python3,
  sbsigntool,
