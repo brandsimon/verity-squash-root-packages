@@ -2,6 +2,7 @@ Source: verity-squash-root
 Build-Depends:
  debhelper (>= 11),
  dh-python,
+ dh-exec,
  lsb-release,
  flake8,
  mypy,
