@@ -30,11 +30,8 @@ jobs:
       - run: sudo bash build_source.sh verity-squash-root
       - run: sudo pbuilder create --distribution bookworm --mirror https://deb.debian.org/debian
       - run: sudo pbuilder build --bindmounts /etc/mkinitcpio.d verity-squash-root_*.dsc
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: debian-bookworm.deb
-          path: /var/cache/pbuilder/result/*.deb
+      - run: sha256sum /var/cache/pbuilder/result/*.deb
+      - run: sha512sum /var/cache/pbuilder/result/*.deb
       - name: Upload Release Asset
         uses: alexellis/upload-assets@0.4.0
         env:
