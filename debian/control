@@ -23,6 +23,7 @@ Depends:
  ${python3:Depends},
  age,
  binutils,
+ cryptsetup-bin,
  efitools,
  python,
  sbsigntool,
