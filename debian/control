@@ -28,6 +28,7 @@ Depends:
  python,
  sbsigntool,
  squashfs-tools,
+ systemd-boot-efi,
  tar
 Architecture: any
 X-Python3-Version: >= 3.X
