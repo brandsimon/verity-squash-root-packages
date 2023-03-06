@@ -1,0 +1,22 @@
+#!/usr/bin/sh
+set -e -x
+cp archlinux/ubuntu_makepkg.list /etc/apt/sources.list.d/makepkg.list
+apt-get update
+apt-get install makepkg pacman-package-manager archlinux-keyring gnupg
+mkdir -p /etc/pacman.d
+cp archlinux/mirrorlist /etc/pacman.d/mirrorlist
+chmod 644 /etc/pacman.d/mirrorlist
+cat archlinux/pacman.conf >> /etc/pacman.conf
+rm /usr/share/keyrings/ubuntu*
+ls -alh /usr/share/keyrings/
+rm -rf /root/.gnupg/
+pacman-key --init
+# echo 'no-auto-key-locate' >> /etc/pacman.d/gnupg/gpg.conf
+echo 'auto-key-locate clear' >> /etc/pacman.d/gnupg/gpg.conf
+echo 'auto-key-locate keyserver' >> /etc/pacman.d/gnupg/gpg.conf
+killall gpg-agent dirmngr || true
+# pacman-key --refresh-keys
+pacman-key --keyserver keyserver.ubuntu.com --populate archlinux
+pacman-key --keyserver keyserver.ubuntu.com --refresh-keys || true
+# pacman-key --keyserver keyring.debian.org --refresh-keys
+pacman -Sy

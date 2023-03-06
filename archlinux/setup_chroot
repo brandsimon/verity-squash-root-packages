@@ -1,0 +1,15 @@
+#!/usr/bin/sh
+set -e
+mkdir -p arch/var/lib/pacman/ arch/etc/pacman.d/gnupg arch/etc/pacman.d/hooks/
+cp /etc/pacman.conf arch/etc
+cp /etc/pacman.d/mirrorlist arch/etc/pacman.d/
+# fakeroot fakechroot pacman -r arch/ --config arch/etc/pacman.conf --noconfirm -Syu
+sudo fakechroot pacman -r arch/ --config arch/etc/pacman.conf --noconfirm --hookdir arch/etc/pacman.d/hooks/ --cachedir arch/var/cache/pacman/pkg/ -Syu archlinux-keyring
+sudo fakechroot pacman -r arch/ --config arch/etc/pacman.conf --noconfirm --hookdir arch/etc/pacman.d/hooks/ --cachedir arch/var/cache/pacman/pkg/ -Syu base pacman bash bash-completion fakechroot
+
+run_inner() {
+	bwrap --bind arch/ / --unshare-user --uid 0 --gid 0 --new-session --dev dev --proc proc fakechroot "${@}"
+}
+run_inner pacman-key --init
+run_inner pacman-key --populate
+run_inner pacman -S archlinux-keyring
