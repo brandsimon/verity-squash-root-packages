@@ -9,6 +9,8 @@ sudo fakechroot pacman -r arch/ --config arch/etc/pacman.conf --noconfirm --hook
 mkdir keys
 tar xf arch/var/cache/pacman/pkg/openssl-3.0.8-1-x86_64.pkg.tar.zst -C keys
 cp arch/usr/share/pacman/keyrings/archlinux.gpg /usr/share/keyrings/
+pacman-key --keyserver keyserver.ubuntu.com --populate archlinux
+pacman-key --keyserver keyserver.ubuntu.com --updatedb
 sudo fakechroot pacman -r arch/ --config arch/etc/pacman.conf --noconfirm --hookdir arch/etc/pacman.d/hooks/ --cachedir arch/var/cache/pacman/pkg/ -Syu base pacman bash bash-completion fakechroot
 
 run_inner() {

@@ -17,6 +17,8 @@ echo 'auto-key-locate keyserver' >> /etc/pacman.d/gnupg/gpg.conf
 killall gpg-agent dirmngr || true
 # pacman-key --refresh-keys
 pacman-key --keyserver keyserver.ubuntu.com --populate archlinux
+pacman-key --keyserver keyserver.ubuntu.com --updatedb
 pacman-key --keyserver keyserver.ubuntu.com --refresh-keys || true
+pacman-key --keyserver keyserver.ubuntu.com --updatedb
 # pacman-key --keyserver keyring.debian.org --refresh-keys
 pacman -Sy
