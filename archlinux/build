@@ -1,0 +1,10 @@
+#!/usr/bin/sh
+run_inner() {
+	bwrap --bind arch/ / --unshare-user --new-session --dev dev --proc proc fakechroot "${@}"
+}
+set -e
+DEST="arch/${HOME}"
+mkdir -p "arch/${HOME}"
+cp -a aur/PKGBUILD "${DEST}"
+run_inner makepkg
+ls -alh "${DEST}"

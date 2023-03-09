@@ -1,3 +1,6 @@
 [submodule "verity-squash-root"]
 	path = verity-squash-root
 	url = https://github.com/brandsimon/verity-squash-root.git
+[submodule "aur"]
+	path = aur
+	url = https://aur.archlinux.org/verity-squash-root.git
