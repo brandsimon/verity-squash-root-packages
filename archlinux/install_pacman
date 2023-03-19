@@ -29,3 +29,5 @@ cp /tmp/keyring/usr/share/pacman/keyrings/archlinux.gpg /usr/share/keyrings/arch
 rm -rf /etc/pacman.d/gnupg/
 pacman-key --init
 pacman-key --populate archlinux
+pacman-key --updatedb
+pacman-key --keyserver keyserver.ubuntu.com --refresh-keys || true
