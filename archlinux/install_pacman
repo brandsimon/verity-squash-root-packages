@@ -25,7 +25,7 @@ pacman -Sy
 wget 'https://archlinux.org/packages/core/any/archlinux-keyring/download/' -O archlinux-keyring.tar
 mkdir /tmp/keyring
 tar xf archlinux-keyring.tar -C /tmp/keyring
-cp /tmp/keyring/usr/share/pacman/keyrings/archlinux.gpg /usr/share/pacman/keyrings/archlinux.gpg
+cp /tmp/keyring/usr/share/pacman/keyrings/archlinux.gpg /usr/share/keyrings/archlinux.gpg
 rm -rf /etc/pacman.d/gnupg/
 pacman-key --init
 pacman-key --populate archlinux
