@@ -22,9 +22,9 @@ pacman-key --keyserver keyserver.ubuntu.com --refresh-keys || true
 pacman-key --keyserver keyserver.ubuntu.com --updatedb
 # pacman-key --keyserver keyring.debian.org --refresh-keys
 pacman -Sy
-wget 'https://archlinux.org/packages/core/any/archlinux-keyring/download/'
+wget 'https://archlinux.org/packages/core/any/archlinux-keyring/download/' -O archlinux-keyring.tar
 mkdir /tmp/keyring
-tar xf archlinux-keyring-*.pkg.tar.* -C /tmp/keyring
+tar xf archlinux-keyring.tar -C /tmp/keyring
 cp /tmp/keyring/usr/share/pacman/keyrings/archlinux.gpg /usr/share/pacman/keyrings/archlinux.gpg
 rm -rf /etc/pacman.d/gnupg/
 pacman-key --init
