@@ -4,6 +4,10 @@ export PYBUILD_NAME=verity-squash-root
 %:
 	dh $@ --with python3 --buildsystem=pybuild
 
+override_dh_auto_install:
+	make install-no-py DESTDIR=debian/verity-squash-root
+	dh_auto_install
+
 override_dh_auto_test:
 	shellcheck usr/lib/initcpio/install/verity-squash-root usr/lib/verity-squash-root/*
 	flake8 src/ tests/ setup.py
