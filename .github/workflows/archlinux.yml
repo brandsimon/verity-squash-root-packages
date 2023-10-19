@@ -1,0 +1,35 @@
+name: Build arch linux package
+on:
+  push:
+    tags:
+    - 'v*'
+jobs:
+  build:
+    permissions:
+      actions: read
+      checks: write
+      contents: write
+      issues: read
+      packages: write
+      pull-requests: read
+      repository-projects: read
+      statuses: read
+    runs-on: ubuntu-latest
+    name: Build arch package
+    steps:
+      - uses: actions/checkout@v3
+      - run: set -e
+      - run: git submodule update --init --recursive
+      # Setup
+      - run: sudo apt-get install docker
+      - run: docker build -t archbuild archlinux --file archlinux/Dockerfile
+      - run: docker run -v $(pwd)/archlinux:/tmp/build -w /tmp/build archbuild bash /tmp/build/build.sh
+      # Upload
+      - run: sudo cp archlinux/aur/verity-squash-root-*-any.pkg.tar.zst /
+      - run: sha512sum /verity-squash-root-*-any.pkg.tar.zst
+      - name: Upload Release Asset
+        uses: alexellis/upload-assets@0.4.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          asset_paths: '["/verity-squash-root-*-any.pkg.tar.zst"]'
