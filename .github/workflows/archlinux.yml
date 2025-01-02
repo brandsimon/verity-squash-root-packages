@@ -21,7 +21,7 @@ jobs:
       - run: set -e
       - run: git submodule update --init --recursive
       # Setup
-      - run: sudo apt-get install docker
+      - run: sudo apt-get install docker.io
       - run: docker build -t archbuild archlinux --file archlinux/Dockerfile
       - run: docker run -v $(pwd)/archlinux:/tmp/build -w /tmp/build archbuild bash /tmp/build/build.sh
       # Upload
